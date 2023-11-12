@@ -1,0 +1,19 @@
+.row-style {
+    display:flex;
+    justify-content: space-between;
+    padding: 14px 2px;
+    margin: 14px 0px;
+    border: 1px solid black;
+    text-align: left;
+}
+
+.column-style-left {
+    flex: 4
+}
+
+.column-style-right {
+    flex: 1
+}
+.checkbox-col {
+    width: 60px;
+}
