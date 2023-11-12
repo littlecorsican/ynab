@@ -22,7 +22,8 @@ function App() {
   ])
   const [spendings, setSpendings ] = useState([
     {name:"spending1", categoryGroup:"name", amount: 500, available: 500, target: null },
-    {name:"spending2", categoryGroup:"name", amount: 1500, available: 1500, target: null },
+    {name:"spending2", categoryGroup:"name", amount: 1500, available: 1500, target: 1 },
+    {name:"spending3", categoryGroup:"name", amount: 1500, available: 1500, target: 0 },
   ])
   /*
   *  name: 
@@ -166,7 +167,8 @@ function App() {
                     text2={`$${value2.amount||0}`}
                     text3={`$${0}`}
                     text4={`$${value2.available||0}`}
-                    click={true}
+                    type="row"
+                    data={value2}
                   />
                 })
               }

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 
-export default function TextArea({ id, label, }:{ id:string, label: string }) {
+export default function TextArea({ id, label }) {
 
   return (
     <div className="p-4">
