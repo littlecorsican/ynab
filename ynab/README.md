@@ -1,3 +1,22 @@
+budget accounts
+- checking -adds to money pool
+- savings
+- cash
+- credit card
+- line of cred9t
+
+loans
+- mortgage
+- auto loans
+- student loans
+- personal loans
+- medical debt
+- other debt
+
+tracking accounts
+- asset eg investment
+- liabilities eg mortgage
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

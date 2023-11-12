@@ -1,24 +1,14 @@
 import logo from './logo.svg';
-import './App.css';
-import Row from './components/Row';
 import { useState, useEffect } from 'react'
-
+import { accounts } from '../enums/accounts';
 
 function App() {
 
-  const [accounts, setAccount ] = useState([
-    /**
-     * account: string
-     * date: date
-     * payee:
-     * category:
-     * outflow:
-     * inflow:
-     */
-  ])
-  const [spendings, setSpendings ] = useState([
-
-  ])
+  const [amount, setAmount ] = useState(0)
+  const [category, setCategory ] = useState(null)
+//   const [amount, setAmount ] = useState(0)
+//   const [amount, setAmount ] = useState(0)
+//   const [amount, setAmount ] = useState(0)
 
   return (
     <div className="App">
