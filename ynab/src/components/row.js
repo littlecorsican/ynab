@@ -1,23 +1,35 @@
 import '../css/row.css';
+import useModal from '../hooks/useModal'
+import { spendingTypes } from '../enums/spendings';
+import DropDownMenu from '../components/DropDownMenu'
 
-function Row({ name, header2, header3, header4 }) {
+function Row(props) {
+
+    const { text1, text2, text3, text4, type, click } = props
+    const { openModal, Modal, closeModal } = useModal();
+
   return (
-    <div className="row-style">
-        <div className="checkbox-col">
-            <input type="checkbox" />
+    <div>
+        <div className={`row-style ${type=='header'? 'row-style-header' : '' }`} onClick={()=>click ? openModal() : null} >
+            <div className="checkbox-col">
+                <input type="checkbox" />
+            </div>
+            <div className="column-style-left">
+                {text1}
+            </div>
+            <div className="column-style-right">
+                {text2}
+            </div>
+            <div className="column-style-right">
+                {text3}
+            </div>
+            <div className="column-style-right">
+                {text4}
+            </div>
         </div>
-        <div className="column-style-left">
-            {name}y
-        </div>
-        <div className="column-style-right">
-            {header2}z
-        </div>
-        <div className="column-style-right">
-            {header3}z
-        </div>
-        <div className="column-style-right">
-            {header4}z
-        </div>
+        <Modal>
+            <DropDownMenu id="target" label="Select Target" list={spendingTypes} />
+        </Modal>
     </div>
   );
 }

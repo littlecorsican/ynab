@@ -7,6 +7,11 @@
     text-align: left;
 }
 
+.row-style-header {
+    background-color: darkslategrey;
+    color: beige;
+}
+
 .column-style-left {
     flex: 4
 }

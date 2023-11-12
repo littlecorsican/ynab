@@ -1,0 +1,13 @@
+Budget settings
+Currency ? USD EUR
+Currency placement ? before amount , after amount , dont show
+Number Format ? 123,456.78, 123.456,78, 123456.78, 123456, 123,456
+Date Format ? 12/30/2023 , 2023/12/30 30/12/2023
+
+
+Spending 
+Types
+- Needed For Spending
+- Savings Balance
+- Monthly Savings Builder
+- Monthly Debt Payment
