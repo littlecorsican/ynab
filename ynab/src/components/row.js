@@ -7,7 +7,7 @@ import InputText from '../components/InputText'
 
 function Row(props) {
 
-    const { name, details, assigned, activity, available, type, data } = props
+    const { name, details, assigned, activity, available, type, onClick } = props
     const { openModal, Modal, closeModal } = useModal();
 
   return (
@@ -34,9 +34,7 @@ function Row(props) {
             </div>
         }
         {
-            type == "row" && <div className={`row-style`} onClick={()=> {
-                openModal()
-            }}>
+            type == "row" && <div className={`row-style`} onClick={onClick}>
                 <div className="checkbox-col">
                     <input type="checkbox" />
                 </div>
@@ -57,14 +55,7 @@ function Row(props) {
                 </div>
             </div>
         }
-        {
-            type == "row" && <Modal>
-                <h3>Current Type: {spendingTypes[data.target]}</h3>
-                <DropDownMenu id="target_pick" label="Select Target" list={spendingTypes} defaultValue={data.target||0} />
-                <InputText id="amount_needed" label="Amount Needed" />
-                <DropDownMenu id="interval" label="Interval" list={interval} />
-            </Modal>
-        }
+
     </div>
   );
 }

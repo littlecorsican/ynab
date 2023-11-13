@@ -1,11 +1,10 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, forwardRef } from "react";
 
-export default function DropDownMenu({ id, label, list, defaultValue }) {
-
+const DropDownMenu = forwardRef(function ( { id, label, list, defaultValue }, ref ) {
     return (
         <div className="p-4">
             <label htmlFor={id} className="mr-2" >{label}</label>: &nbsp;
-            <select id={id} defaultValue={defaultValue||0}>
+            <select id={id} defaultValue={defaultValue||0} ref={ref}>
                 {
                     Array.isArray(list) && list.map((value)=>{
                         return <option key={value.id} value={value.id}>{value.title}</option>
@@ -20,4 +19,6 @@ export default function DropDownMenu({ id, label, list, defaultValue }) {
             </select>
         </div>
     );
-};
+});
+
+export default DropDownMenu

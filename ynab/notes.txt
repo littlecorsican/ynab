@@ -11,3 +11,6 @@ Types
 - Savings Balance
 - Monthly Savings Builder
 - Monthly Debt Payment
+
+
+https://support.ynab.com/en_us/targets-in-ynab-a-guide-rk5kkI9ks
