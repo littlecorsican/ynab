@@ -7,7 +7,7 @@ import InputText from '../components/InputText'
 
 function Row(props) {
 
-    const { text1, text2, text3, text4, type, data } = props
+    const { name, details, assigned, activity, available, type, data } = props
     const { openModal, Modal, closeModal } = useModal();
 
   return (
@@ -16,17 +16,20 @@ function Row(props) {
             <div className="checkbox-col">
                 <input type="checkbox" />
             </div>
-            <div className="column-style-left">
-                {text1}
+            <div className="column-style-two">
+                {name}
             </div>
-            <div className="column-style-right">
-                {text2}
+            <div className="column-style-four">
+                {details}
             </div>
-            <div className="column-style-right">
-                {text3}
+            <div className="column-style-one">
+                {assigned}
             </div>
-            <div className="column-style-right">
-                {text4}
+            <div className="column-style-one">
+                {activity}
+            </div>
+            <div className="column-style-one">
+                {available}
             </div>
             </div>
         }
@@ -37,17 +40,20 @@ function Row(props) {
                 <div className="checkbox-col">
                     <input type="checkbox" />
                 </div>
-                <div className="column-style-left">
-                    {text1}
+                <div className="column-style-two">
+                    {name}
                 </div>
-                <div className="column-style-right">
-                    {text2}
+                <div className="column-style-four">
+                    {details}
                 </div>
-                <div className="column-style-right">
-                    {text3}
+                <div className="column-style-one">
+                    {assigned}
                 </div>
-                <div className="column-style-right">
-                    {text4}
+                <div className="column-style-one">
+                    {activity}
+                </div>
+                <div className="column-style-one">
+                    {available}
                 </div>
             </div>
         }

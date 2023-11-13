@@ -146,27 +146,27 @@ function App() {
           })
         }
         <h2>Spending</h2>
-        <Row text1="Category" type="header" text2="Assigned" text3="Activity" text4="Available" />
+        <Row name="Category" type="header" assigned="Assigned" activity="Activity" available="Available" details="Comments" />
         {
           columns && columns.map((value, index)=>{
             console.log("value", value)
             return <div>
               <Row 
                 key={value.name} 
-                text1={value.name}
+                name={value.name}
                 type="header"
-                text2={`$${value.totalAmt||0}`}
-                text3={`$${0}`}
-                text4={`$${value.totalAvailable||0}`}
+                assigned={`$${value.totalAmt||0}`}
+                activity={`$${0}`}
+                available={`$${value.totalAvailable||0}`}
               />
               {
                 value.list.map((value2,index)=>{
                   return <Row 
                     key={index}
-                    text1={value2.name}
-                    text2={`$${value2.amount||0}`}
-                    text3={`$${0}`}
-                    text4={`$${value2.available||0}`}
+                    name={value2.name}
+                    assigned={`$${value2.amount||0}`}
+                    activity={`$${0}`}
+                    available={`$${value2.available||0}`}
                     type="row"
                     data={value2}
                   />

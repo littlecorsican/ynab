@@ -12,11 +12,15 @@
     color: beige;
 }
 
-.column-style-left {
+.column-style-four {
     flex: 4
 }
 
-.column-style-right {
+.column-style-two {
+    flex: 2
+}
+
+.column-style-one {
     flex: 1
 }
 .checkbox-col {
