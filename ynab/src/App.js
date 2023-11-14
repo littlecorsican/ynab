@@ -23,31 +23,43 @@ function App() {
    * inflow:
   */
   const [accounts, setAccount ] = useState([
-    {name:"account1", amount: 500},
-    {name:"account2", amount: 500},
+    {name:"Maybank", amount: 500},
+    {name:"Public Bank", amount: 500},
   ])
   const [spendings, setSpendings ] = useState([
-    {name:"spending1", categoryGroup:"name", assigned: 500, available: 500, target: null },
-    {name:"spending2", categoryGroup:"name", assigned: 1500, available: 1500, target: {
+    {name:"Rent/Mortgage", categoryGroup:"Bills", assigned: 500, available: 500, target: null },
+    {name:"Electric", categoryGroup:"Bills", assigned: 1500, available: 1500, target: {
         type: 1,
         amount: 300,
         interval: 1
       } 
     },
-    {name:"spending3", categoryGroup:"name", assigned:1500, available: 1500, target: {
+    {name:"Water", categoryGroup:"Bills", assigned:1500, available: 1500, target: {
         type: 1,
         amount: 500,
         interval: 1
       } 
     },
+    {name:"Internet", categoryGroup:"Bills", assigned: 0, available:0, target: null },
+    {name:"Groceries", categoryGroup:"Frequent", assigned: 0, available: 0, target: null },
+    {name:"Eating Out", categoryGroup:"Frequent", assigned: 0, available: 0, target: null },
+    {name:"Transportation", categoryGroup:"Frequent", assigned: 0, available: 0, target: null },
+    {name:"Home Maintenance", categoryGroup:"Non Monthly", assigned: 0, available: 0, target: null },
+    {name:"Auto Maintenance", categoryGroup:"Non Monthly", assigned: 0, available: 0, target: null },
+    {name:"Gifts", categoryGroup:"Non Monthly", assigned: 0, available: 0, target: null },
+    {name:"Vacation", categoryGroup:"Goals", assigned: 0, available: 0, target: null },
+    {name:"Education", categoryGroup:"Goals", assigned: 0, available: 0, target: null },
+    {name:"Home Improvement", categoryGroup:"Goals", assigned: 0, available: 0, target: null },
+    {name:"Hobbies", categoryGroup:"Quality of Life", assigned: 0, available: 0, target: null },
+    {name:"Entertainment", categoryGroup:"Quality of Life", assigned: 0, available: 0, target: null },
+    {name:"Health & Wellness", categoryGroup:"Quality of Life", assigned: 0, available: 0, target: null },
   ])
-  /*
-  *  name: 
-  *  amount:
-  *  categoryGroup:
-  */
   const [spendingCategoryGroup, setSpendingCategoryGroup] = useState([
-    {name:"name", list:[]}
+    {name:"Bills", list:[]},
+    {name:"Frequent", list:[]},
+    {name:"Non Monthly", list:[]},
+    {name:"Goals", list:[]},
+    {name:"Quality of Life", list:[]},
   ])
   const [columns, setColumns] = useState(null)
   const [totalReadyToAssign, setTotalReadyToAssign] = useState(0)
@@ -174,7 +186,6 @@ function App() {
                     assigned={`$${value2.assigned||0}`}
                     activity={`$${0}`}
                     available={`$${value2.available||0}`}
-                    //details={`${value2?.target ? '$' + (parseFloat(value2?.target?.amount) - parseFloat(value2.available)) + ' more is needed' : ""}`}
                     details={calculateSpendingText({
                       available: value2.available,
                       targetAmount: value2?.target?.amount,

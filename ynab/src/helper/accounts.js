@@ -1,7 +1,7 @@
 
 
 export const readyToAssignComments=(readyToAssignAmt)=>{
-    if (readyToAssignAmt > 0) {
+    if (readyToAssignAmt >= 0) {
         return {
             message : `$${readyToAssignAmt} ready to assign`,
             aboveZero: true

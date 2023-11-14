@@ -15,6 +15,25 @@ const AddTargetModalContent = forwardRef(function ( {selectedSpending, spendings
         setShowToggleEdit(!showToggleEdit)
     }
 
+    const setSpendingDetails=()=>{
+        setSpendings( 
+            spendings.map((value=>{
+            if (value.name == selectedSpending.name && value.categoryGroup == selectedSpending.categoryGroup) {
+                return {
+                ...value,
+                target: {
+                    type: target_pick_ref.current.value,
+                    amount: amount_needed_ref.current.value,
+                    interval: interval_ref.current.value
+                }
+                }
+            }
+            return value
+            }))
+        )
+        closeModal()
+    }
+
     return (
         <div className="">
             <h3>Type: {selectedSpending?.target?.type ? spendingTypes[selectedSpending?.target?.type] : "Not yet define"}</h3>
@@ -24,25 +43,21 @@ const AddTargetModalContent = forwardRef(function ( {selectedSpending, spendings
             <div style={{ display: showToggleEdit ? "block" : "none" }}>
                 <DropDownMenu id="target_pick" label="Select Target" list={spendingTypes} defaultValue={selectedSpending?.target?.type||0} ref={target_pick_ref} />
                 <InputText id="amount_needed" label="Amount Needed" ref={amount_needed_ref} type="number" />
-                <DropDownMenu id="interval" label="Interval" list={interval} ref={interval_ref} />
-                <button onClick={()=>{
-                    setSpendings( 
-                        spendings.map((value=>{
-                        if (value.name == selectedSpending.name && value.categoryGroup == selectedSpending.categoryGroup) {
-                            return {
-                            ...value,
-                            target: {
-                                type: target_pick_ref.current.value,
-                                amount: amount_needed_ref.current.value,
-                                interval: interval_ref.current.value
-                            }
-                            }
-                        }
-                        return value
-                        }))
-                    )
-                    closeModal()
-                }}>Save Target</button>
+                {/* {(target_pick_ref?.current?.value == 0 || target_pick_ref?.current?.value == 3) && <div><DropDownMenu id="interval" label="Interval" list={interval} ref={interval_ref} onChange={()=>{
+                    switch(interval_ref.current.value) {
+                        case "0":
+
+                        break;
+                        case "1":
+
+                        break;
+                        default:
+                        // code block
+                    }
+                }}/>
+                </div>} */}
+                <div style={{ color:"red" }}>CURRENTLY FOR INTERVAL ONLY END OF MONTH IS AVAILABLE. HAVENT GOT TIME TO CODE THE REST</div>
+                <button onClick={setSpendingDetails}>Save Target</button>
             </div>
         </div>
     );
