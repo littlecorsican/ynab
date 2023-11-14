@@ -1,0 +1,18 @@
+.modal {
+    position: absolute;
+    margin : 0 auto;
+    width : 100%;
+    top: 40vh;
+    background-color: aquamarine;
+    padding: 50px 25px;
+
+}
+
+.modal-content {
+
+}
+
+button {
+    padding: 14px 16px;
+    border-radius: 4px;
+}

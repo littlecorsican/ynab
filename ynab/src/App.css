@@ -43,3 +43,16 @@
   margin: 12px;
   padding: 12px;
 }
+
+.green-back {
+  padding: 12px 16px;
+  background-color: chartreuse;
+  border-radius: 4px;
+}
+
+.red-back {
+  padding: 12px 16px;
+  background-color: red;
+  color: #fff;
+  border-radius: 4px;
+}

@@ -8,12 +8,11 @@ import DropDownMenu from './components/DropDownMenu'
 import InputText from './components/InputText'
 import { calculateSpendingText } from './helper/spendings'
 import { readyToAssignComments } from './helper/accounts'
-
+import AddTargetModalContent from './modals/AddTargetModalContent'
+import AddSpendingCategoryModalContent from './modals/AddSpendingCategoryModalContent'
+import AddAccountModalContent from './modals/AddAccountModalContent'
+import AddSpendingModalContent from './modals/AddSpendingModalContent'
 function App() {
-
-  const amount_needed_ref = useRef()
-  const target_pick_ref = useRef()
-  const interval_ref = useRef()
 
   /**
    * account: string
@@ -119,60 +118,32 @@ function App() {
   },[accounts, spendings, spendingCategoryGroup])
 
   const { openModal:openAddSpendingCategoryGroupModal, Modal:AddSpendingCategoryGroupModal, closeModal:closeAddSpendingCategoryGroupModal } = useModal();
+  const { openModal:openAddAccountModal, Modal:AddAccountModal, closeModal:closeAddAccountModal } = useModal();
+  const { openModal:openAddSpendingModal, Modal:AddSpendingModal, closeModal:closeAddSpendingModal } = useModal();
   const { openModal:openAddTargetModal, Modal:AddTargetModal, closeModal:closeAddTargetModal } = useModal();
 
   return (
     <div className="App">
-      <div className="button-bar">
+      {/* <div className="button-bar">
         <button>All</button>
         <button>Underfunded</button>
         <button>Overfunded</button>
         <button>Money Available</button>
-      </div>
+      </div> */}
       <div className="button-bar">
         <button onClick={()=>{
-          const amount = prompt("input amount")
-          const categoryGroup = prompt("input category group")
-          const name = prompt("input name")
-          if (amount === null || !categoryGroup || !name) {
-            return;
-          }
-          addAccounts(name, amount, categoryGroup)
+          openAddAccountModal()
         }}>Add Accounts</button>
         <button onClick={()=>{
-          const amount = prompt("input amount")
-          const categoryGroup = prompt("input category group")
-          const find = spendingCategoryGroup.find((value)=>{
-            return value.name == categoryGroup
-          })
-          if (!find) {
-            alert("Category Group doesnt exists, create spending category group first")
-            return
-          }
-          const name = prompt("input name")
-          if (amount === null || !categoryGroup || !name) {
-            return;
-          }
-          addSpending(name, amount, categoryGroup)
+          openAddSpendingModal()
         }}>Add Spending</button>
         <button onClick={()=>{
-          const name = prompt("input name")
-          if (!name) {
-            return;
-          }
-          const find = spendingCategoryGroup.find((value)=>{
-            return value.name == name
-          })
-          if (find) {
-            alert("Category group already exist")
-            return
-          }
-          addSpendingCategoryGroup(name)
+          openAddSpendingCategoryGroupModal()
         }}>Add Spending Category Group</button>
       </div>
       <div>
         <h2>Ready to assign</h2>
-        <div>
+        <div className={`${readyToAssignComments(totalReadyToAssign).aboveZero ? "green-back" : "red-back"}`}>
           {readyToAssignComments(totalReadyToAssign).message}
         </div>
         <h2>Budget</h2>
@@ -223,36 +194,33 @@ function App() {
         }
       </div>
       <AddSpendingCategoryGroupModal>
-        
+        <AddSpendingCategoryModalContent
+          closeModal={closeAddSpendingCategoryGroupModal}
+          addSpendingCategoryGroup={addSpendingCategoryGroup}
+          spendingCategoryGroup={spendingCategoryGroup}
+        />
       </AddSpendingCategoryGroupModal>
-      {
-        <AddTargetModal>
-          <h3>Current Type: {selectedSpending?.target?.type ? spendingTypes[selectedSpending?.target?.type] : "Not yet define"}</h3>
-          <h3>Amount: {selectedSpending?.target?.amount || "Not yet define"}</h3>
-          <h3> Interval: {interval[selectedSpending?.target?.interval] || "Not yet define"} </h3>
-          <DropDownMenu id="target_pick" label="Select Target" list={spendingTypes} defaultValue={selectedSpending?.target?.type||0} ref={target_pick_ref} />
-          <InputText id="amount_needed" label="Amount Needed" ref={amount_needed_ref} type="number" />
-          <DropDownMenu id="interval" label="Interval" list={interval} ref={interval_ref} />
-          <button onClick={()=>{
-            setSpendings( 
-              spendings.map((value=>{
-                if (value.name == selectedSpending.name && value.categoryGroup == selectedSpending.categoryGroup) {
-                  return {
-                    ...value,
-                    target: {
-                      type: target_pick_ref.current.value,
-                      amount: amount_needed_ref.current.value,
-                      interval: interval_ref.current.value
-                    }
-                  }
-                }
-                return value
-              }))
-            )
-            closeAddTargetModal()
-          }}>Save Target</button>
-        </AddTargetModal>
-      }
+      <AddTargetModal>
+        <AddTargetModalContent
+          selectedSpending={selectedSpending}
+          spendings={spendings}
+          setSpendings={setSpendings}
+          closeModal={closeAddTargetModal}
+        />
+      </AddTargetModal>
+      <AddAccountModal>
+        <AddAccountModalContent
+          addAccounts={addAccounts}
+          closeModal={closeAddAccountModal}
+        />
+      </AddAccountModal>
+      <AddSpendingModal>
+        <AddSpendingModalContent
+          spendingCategoryGroup={spendingCategoryGroup}
+          closeModal={closeAddSpendingModal}
+          addSpending={addSpending}
+        />
+      </AddSpendingModal>
     </div>
   );
 }
