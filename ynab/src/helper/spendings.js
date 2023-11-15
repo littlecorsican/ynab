@@ -9,11 +9,10 @@
  */
 
 export const calculateSpendingText=({available, targetType, targetAmount, targetInterval})=>{
-
-    if (available && targetAmount && targetType && targetInterval) {
+    if (available != undefined && targetAmount != undefined && targetType != undefined && targetInterval != undefined) {
         switch(parseInt(targetType)) {
             case 0:  //Needed For Spending
-                if (available >= targetAmount) {
+                if (parseFloat(available) >= parseFloat(targetAmount)) {
                     return {
                         message: `$${parseFloat(targetAmount)} needed --- Fully funded`
                     }
@@ -23,7 +22,7 @@ export const calculateSpendingText=({available, targetType, targetAmount, target
                 }
                 break;
             case 1: // Savings Balance
-                if (available >= targetAmount) {
+                if (parseFloat(available) >= parseFloat(targetAmount)) {
                     return {
                         message: `$${parseFloat(targetAmount)} needed --- Fully funded`
                     }
@@ -33,7 +32,7 @@ export const calculateSpendingText=({available, targetType, targetAmount, target
                 }
                 break;
             case 2: // Monthly Savings Builder
-                if (available >= targetAmount) {
+                if (parseFloat(available) >= parseFloat(targetAmount)) {
                     return {
                         message: `$${parseFloat(targetAmount)} needed --- Fully funded`
                     }
@@ -43,7 +42,7 @@ export const calculateSpendingText=({available, targetType, targetAmount, target
                 }
                 break;
             case 3: // Monthly Debt Payment
-            if (available >= targetAmount) {
+                if (parseFloat(available) >= parseFloat(targetAmount)) {
                 return {
                     message: `$${parseFloat(targetAmount)} needed --- Fully funded`
                 }

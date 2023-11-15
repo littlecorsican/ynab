@@ -180,6 +180,7 @@ function App() {
               />
               {
                 value.list.map((value2,index)=>{
+                  console.log("xxxxxxxxxxxxxxxxxxxx", value2)
                   return <Row 
                     key={index}
                     name={value2.name}

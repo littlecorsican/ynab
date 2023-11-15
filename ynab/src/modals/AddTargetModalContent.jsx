@@ -24,7 +24,8 @@ const AddTargetModalContent = forwardRef(function ( {selectedSpending, spendings
                 target: {
                     type: target_pick_ref.current.value,
                     amount: amount_needed_ref.current.value,
-                    interval: interval_ref.current.value
+                    //interval: interval_ref.current.value,
+                    interval: 1
                 }
                 }
             }
