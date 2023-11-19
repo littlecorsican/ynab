@@ -8,10 +8,13 @@ import DropDownMenu from './components/DropDownMenu'
 import InputText from './components/InputText'
 import { calculateSpendingText } from './helper/spendings'
 import { readyToAssignComments } from './helper/accounts'
+import { loanComments } from './helper/loans'
 import AddTargetModalContent from './modals/AddTargetModalContent'
 import AddSpendingCategoryModalContent from './modals/AddSpendingCategoryModalContent'
 import AddAccountModalContent from './modals/AddAccountModalContent'
 import AddSpendingModalContent from './modals/AddSpendingModalContent'
+import AddLoanModalContent from './modals/AddLoanModalContent'
+import AddLoanTargetModalContent from './modals/AddLoanTargetModalContent'
 function App() {
 
   /**
@@ -25,6 +28,10 @@ function App() {
   const [accounts, setAccount ] = useState([
     {name:"Maybank", amount: 500},
     {name:"Public Bank", amount: 500},
+  ])
+  const [loans, setLoans] = useState([
+    {name:"Auto Loan", amount: 5000 , assigned: 0, available: 0, interest: 4},
+    {name:"House Loan", amount: 275000, assigned: 0, available: 0, interest: 5},
   ])
   const [spendings, setSpendings ] = useState([
     {name:"Rent/Mortgage", categoryGroup:"Bills", assigned: 500, available: 500, target: null },
@@ -64,6 +71,7 @@ function App() {
   const [columns, setColumns] = useState(null)
   const [totalReadyToAssign, setTotalReadyToAssign] = useState(0)
   const [selectedSpending, setSelectedSpending] = useState(null)
+  const [selectedLoan, setSelectedLoan] = useState(null)
 
   const addSpending=(name, amount, categoryGroup)=>{
     setSpendings([ ...spendings, {
@@ -85,6 +93,16 @@ function App() {
 
   const addSpendingCategoryGroup=(name)=>{
     setSpendingCategoryGroup([ ...spendingCategoryGroup, { name, list:[] } ])
+  }
+
+  const addLoans=(name, amount, interest)=>{
+    setLoans([ ...loans, {
+      amount,
+      name,
+      interest,
+      assigned: 0,
+      available: 0
+    } ])
   }
 
   useEffect(()=>{
@@ -133,6 +151,8 @@ function App() {
   const { openModal:openAddAccountModal, Modal:AddAccountModal, closeModal:closeAddAccountModal } = useModal();
   const { openModal:openAddSpendingModal, Modal:AddSpendingModal, closeModal:closeAddSpendingModal } = useModal();
   const { openModal:openAddTargetModal, Modal:AddTargetModal, closeModal:closeAddTargetModal } = useModal();
+  const { openModal:openAddLoanModal, Modal:AddLoanModal, closeModal:closeAddLoanModal } = useModal();
+  const { openModal:openAddLoanTargetModal, Modal:AddLoanTargetModal, closeModal:closeAddLoanTargetModal } = useModal();
 
   return (
     <div className="App">
@@ -152,6 +172,9 @@ function App() {
         <button onClick={()=>{
           openAddSpendingCategoryGroupModal()
         }}>Add Spending Category Group</button>
+        <button onClick={()=>{
+          openAddLoanModal()
+        }}>Add Loan</button>
       </div>
       <div>
         <h2>Ready to assign</h2>
@@ -180,7 +203,6 @@ function App() {
               />
               {
                 value.list.map((value2,index)=>{
-                  console.log("xxxxxxxxxxxxxxxxxxxx", value2)
                   return <Row 
                     key={index}
                     name={value2.name}
@@ -202,6 +224,27 @@ function App() {
                 })
               }
             </div>
+          })
+        }
+        <h2>Loans</h2>
+        <Row name="Loan Type" type="header" assigned="Assigned" activity="Activity" available="Available" details="Comments" />
+        {
+          loans.map((value, index)=>{
+            return <Row 
+            key={index}
+            name={value.name}
+            assigned={`$${value.assigned||0}`}
+            activity={`$${0}`}
+            available={`$${value.available||0}`}
+            details={
+              loanComments(value.amount, value.interest)
+            }
+            type="row"
+            onClick={()=>{
+              setSelectedLoan(value)
+              openAddLoanTargetModal()
+            }}
+          />
           })
         }
       </div>
@@ -233,6 +276,18 @@ function App() {
           addSpending={addSpending}
         />
       </AddSpendingModal>
+      <AddLoanModal>
+        <AddLoanModalContent 
+          addLoans={addLoans}
+          closeModal={closeAddLoanModal}
+        />
+      </AddLoanModal>
+      <AddLoanTargetModal>
+        <AddLoanTargetModalContent 
+          selectedLoan={selectedLoan}
+          closeModal={closeAddLoanTargetModal}
+        />
+      </AddLoanTargetModal>
     </div>
   );
 }
