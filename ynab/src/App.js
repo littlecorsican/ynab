@@ -238,7 +238,7 @@ function App() {
             activity={`$${0}`}
             available={`$${value.available||0}`}
             details={
-              loanComments(value.amount, value.interest)
+              loanComments(value.amount, value.interest, value?.target)
             }
             type="row"
             onClick={()=>{
@@ -285,6 +285,8 @@ function App() {
       </AddLoanModal>
       <AddLoanTargetModal>
         <AddLoanTargetModalContent 
+          setLoans={setLoans}
+          loans={loans}
           selectedLoan={selectedLoan}
           closeModal={closeAddLoanTargetModal}
         />

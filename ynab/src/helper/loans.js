@@ -1,8 +1,9 @@
 
 
-export const loanComments=(amount, interest)=>{
+export const loanComments=(amount, interest, target)=>{
     return `Loan Amount: -${amount} \n
-        Interest: ${interest}%
+        Interest: ${interest}% \n
+        ${target ? target.monthly_payment + " / " + target.remaining : null }
     `
 }
 
@@ -45,6 +46,13 @@ export const calculateNumberOfTerms=(principle, interest_rate, minimum_payment)=
     const step1_2 = step1 / minimum_payment
     const step1_3 = 1-step1_2
     const step1_4 = Math.log(step1_3, 10)
-    return Math.round(-(step1_4 / step2_2) ) 
+    return Math.ceil(-(step1_4 / step2_2) ) 
 
+}
+
+export const addZeroIfSingleDigit=(digit)=>{
+    if (digit.toString().length == 1) {
+        return "0" + digit
+    }
+    return digit
 }
