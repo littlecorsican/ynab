@@ -30,8 +30,8 @@ function App() {
     {name:"Public Bank", amount: 500},
   ])
   const [loans, setLoans] = useState([
-    {name:"Auto Loan", amount: 5000 , assigned: 0, available: 0, interest: 4},
-    {name:"House Loan", amount: 275000, assigned: 0, available: 0, interest: 5},
+    {name:"Auto Loan", amount: 5000 , assigned: 0, available: 0, interest: 4, minimum: 100},
+    {name:"House Loan", amount: 275000, assigned: 0, available: 0, interest: 5, minimum: 100},
   ])
   const [spendings, setSpendings ] = useState([
     {name:"Rent/Mortgage", categoryGroup:"Bills", assigned: 500, available: 500, target: null },
@@ -95,13 +95,14 @@ function App() {
     setSpendingCategoryGroup([ ...spendingCategoryGroup, { name, list:[] } ])
   }
 
-  const addLoans=(name, amount, interest)=>{
+  const addLoans=(name, amount, interest, minimum)=>{
     setLoans([ ...loans, {
       amount,
       name,
       interest,
       assigned: 0,
-      available: 0
+      available: 0,
+      minimum
     } ])
   }
 
